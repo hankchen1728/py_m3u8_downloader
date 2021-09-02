@@ -6,7 +6,6 @@ import tqdm
 import shutil
 import argparse
 import requests
-import threading
 import subprocess
 from datetime import datetime
 from functools import partial
@@ -145,7 +144,6 @@ def main(args):
 
     # Using multithreading to parallel downloading
     pool = Pool(20)
-    lock = threading.Lock()
     gen = pool.imap(partial(download_ts_file, store_dir='.'), ts_url_list)
     for _ in tqdm.tqdm(gen, total=len(ts_url_list)):
         pass
